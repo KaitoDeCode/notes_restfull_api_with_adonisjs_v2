@@ -10,4 +10,7 @@
 import NotesController from '#controllers/notes_controller'
 import router from '@adonisjs/core/services/router'
 
-router.get('/notes',[NotesController,'index']).as('get.notes')
+router.group(()=>{
+  router.get('/notes',[NotesController,'index']).as('get.notes')
+
+}).prefix('api/v1')
