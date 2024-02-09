@@ -5,8 +5,10 @@ import { HttpContext } from "@adonisjs/core/http";
 
 export default class NotesController {
   async index(ctx: HttpContext){
+
     const data = await Note.all();
-    return ctx.response.json({
+    return ctx.response.status(200).json({
+      message:"Success",
       data
     })
   }
