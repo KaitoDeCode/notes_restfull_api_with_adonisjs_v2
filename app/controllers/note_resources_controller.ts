@@ -1,5 +1,5 @@
 import Note from '#models/note';
-import { RequestStoreNote } from '#validators/note';
+import { RequestStoreNote, RequestUpdateNote } from '#validators/note';
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class NoteResourcesController {
@@ -49,7 +49,16 @@ export default class NoteResourcesController {
   /**
    * Handle form submission for the edit action
    */
-  // async update({ params, request }: HttpContext) {}
+  async update({ params, request,response }: HttpContext) {
+    const payload = request.validateUsing(RequestUpdateNote);
+    const data = request.all()
+    const note = await Note.findOrFail(params.id)
+    await note.merge(data).save()
+    return response.json({
+      message : "Success update note",
+      note
+    })
+  }
 
   /**
    * Delete record

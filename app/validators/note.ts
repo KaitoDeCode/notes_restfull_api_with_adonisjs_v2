@@ -1,10 +1,10 @@
-import vine, { SimpleMessagesProvider } from '@vinejs/vine'
+import vine from '@vinejs/vine'
 
-vine.messagesProvider = new SimpleMessagesProvider({
-  'required' : 'Inputan {{ field }} wajib diisi',
-  'string' : 'Nilai dari inputan {{ field }} wajib bertipe string',
-  'email' : 'Nilai dari inputan bukan email yang valid'
-})
+// vine.messagesProvider = new SimpleMessagesProvider({
+//   'required' : 'Inputan {{ field }} wajib diisi',
+//   'string' : 'Nilai dari inputan {{ field }} wajib bertipe string',
+//   'email' : 'Nilai dari inputan bukan email yang valid'
+// })
 
 export const RequestStoreNote =  vine.compile(
   vine.object({
@@ -13,4 +13,10 @@ export const RequestStoreNote =  vine.compile(
    })
 )
 
+export const RequestUpdateNote = vine.compile(
+  vine.object({
+    title: vine.string().trim().maxLength(100).optional(),
+    contents : vine.string().trim().maxLength(500).escape().optional(),
+  })
+)
 
