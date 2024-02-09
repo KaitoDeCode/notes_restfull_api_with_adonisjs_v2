@@ -34,7 +34,13 @@ export default class NoteResourcesController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({ params,response }: HttpContext) {
+    const note = await Note.findOrFail(params.id);
+    return response.status(200).json({
+      message : "Success get note" ,
+      data : note
+    })
+  }
 
   /**
    * Edit individual record
