@@ -17,5 +17,6 @@ router.group(()=>{
   router.get('/notes/:id',[NoteResourcesController,'show']).as('show.notes')
   router.post('/create-notes',[NoteResourcesController,'store']).as('store.notes')
   router.put('/update-notes/:id',[NoteResourcesController,'update']).as('update.notes')
+  router.delete('/delete-notes/:id',[NoteResourcesController,'destroy']).as('delete.notes')
 
 }).prefix('api/v1')

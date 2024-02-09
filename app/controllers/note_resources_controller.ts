@@ -63,5 +63,11 @@ export default class NoteResourcesController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params,response }: HttpContext) {
+    const note  = await Note.findOrFail(params.id)
+    await note.delete()
+    return response.status(200).json({
+      message : "Success delete note"
+    })
+  }
 }
