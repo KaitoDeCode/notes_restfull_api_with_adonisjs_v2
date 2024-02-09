@@ -1,4 +1,5 @@
 import Note from '#models/note';
+import { RequestStoreNote } from '#validators/note';
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class NoteResourcesController {
@@ -22,11 +23,11 @@ export default class NoteResourcesController {
    * Handle form submission for the create action
    */
   async store({ request,response }: HttpContext) {
-    const data:Object = request.only(['title','contents'])
-    const result = await Note.create(data)
+    const data:Object = request.all();
+    const payload = await RequestStoreNote.validate(data);
+    Note.create(payload);
     return response.status(200).json({
-      message:"Success",
-      data : result
+      message:"Success insert note",
     })
   }
 

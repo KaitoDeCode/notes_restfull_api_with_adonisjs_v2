@@ -7,8 +7,10 @@
 |
 */
 
-import NoteResourcesController from '#controllers/note_resources_controller'
 import router from '@adonisjs/core/services/router'
+
+// Controller
+const NoteResourcesController =()=> import('#controllers/note_resources_controller')
 
 router.group(()=>{
   router.get('/notes',[NoteResourcesController,'index']).as('get.notes')
