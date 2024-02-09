@@ -23,8 +23,7 @@ export default class NoteResourcesController {
    * Handle form submission for the create action
    */
   async store({ request,response }: HttpContext) {
-    const data:Object = request.all();
-    const payload = await RequestStoreNote.validate(data);
+    const payload = await request.validateUsing(RequestStoreNote);
     Note.create(payload);
     return response.status(200).json({
       message:"Success insert note",
@@ -37,7 +36,7 @@ export default class NoteResourcesController {
   async show({ params,response }: HttpContext) {
     const note = await Note.findOrFail(params.id);
     return response.status(200).json({
-      message : "Success get note" ,
+      message : "Success get note",
       data : note
     })
   }
