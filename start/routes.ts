@@ -19,4 +19,4 @@ router.group(()=>{
   router.put('/update-notes/:id',[NoteResourcesController,'update']).as('update.notes')
   router.delete('/delete-notes/:id',[NoteResourcesController,'destroy']).as('delete.notes')
 
-}).prefix('api/v1')
+}).prefix('api/bykaito')
